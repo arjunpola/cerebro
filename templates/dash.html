@@ -1,0 +1,471 @@
+<html>
+	<head>		
+		<h1 align="center" class="heading">Welcome {{name}}</h1>
+		<style type="text/css">
+			.textbox_big
+			{
+				border-top-left-radius: 6px;
+				border-top-right-radius: 6px;
+				border-bottom-right-radius: 6px;
+				border-bottom-left-radius: 6px;	
+				border-width: 1px;				
+				text-decoration: none;	
+				color:#181818;
+				font-size:25px;
+				font-weight:bold;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-weight: 500;			
+			}
+		</style>
+		<script>
+			function openDialog() {
+				Avgrund.show( "#default-popup" );
+			}
+			function closeDialog() {
+				Avgrund.hide();
+			}
+		</script>
+		<!--___________________________________________________________________________-->
+		<!--___________________________________________________________________________-->
+		<!--__________________________css for the popup________________________________-->
+		<!--___________________________________________________________________________-->
+		<style type="text/css">
+.avgrund-active body {
+	-webkit-transform: scale( 0.9 );
+	   -moz-transform: scale( 0.9 );
+	    -ms-transform: scale( 0.9 );
+	     -o-transform: scale( 0.9 );
+	        transform: scale( 0.9 );
+}
+
+.avgrund-cover {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	visibility: hidden;
+	opacity: 0;
+	background: rgba( 0, 0, 0, 0.5 );
+}
+	.avgrund-active .avgrund-cover {
+		visibility: visible;
+		opacity: 1;
+	}
+
+.avgrund-contents {
+	position: relative;
+	padding: 20px;
+	max-width: 400px;
+	height: 100%;
+	margin: auto;
+}
+	.avgrund-active .avgrund-contents {
+		-webkit-filter: blur(2px);
+		   -moz-filter: blur(2px);
+		    -ms-filter: blur(2px);
+		     -o-filter: blur(2px);
+		        filter: blur(2px);
+	}
+	.no-blur.avgrund-active .avgrund-contents {
+		-webkit-filter: none;
+		   -moz-filter: none;
+		    -ms-filter: none;
+		     -o-filter: none;
+		        filter: none;
+	}
+
+.avgrund-popup {
+	position: absolute;
+	width: 440px;
+	height: 280px;
+	left: 50%;
+	top: 50%;
+	margin: -130px 0 0 -190px;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 2;
+	padding: 20px;
+
+	background: white;
+	box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 );
+	border-radius: 3px;
+
+	-webkit-transform: scale( 0.8 );
+	   -moz-transform: scale( 0.8 );
+	    -ms-transform: scale( 0.8 );
+	     -o-transform: scale( 0.8 );
+	        transform: scale( 0.8 );
+}
+	.avgrund-active .avgrund-popup-animate {
+		visibility: visible;
+		opacity: 1;
+
+		-webkit-transform: scale( 1.1 );
+		   -moz-transform: scale( 1.1 );
+		    -ms-transform: scale( 1.1 );
+		     -o-transform: scale( 1.1 );
+		        transform: scale( 1.1 );
+	}
+	.avgrund-popup.stack {
+		-webkit-transform: scale( 1.5 );
+		   -moz-transform: scale( 1.5 );
+		    -ms-transform: scale( 1.5 );
+		     -o-transform: scale( 1.5 );
+		        transform: scale( 1.5 );
+	}
+	.avgrund-active .avgrund-popup.stack {
+		-webkit-transform: scale( 1.1 );
+		   -moz-transform: scale( 1.1 );
+		    -ms-transform: scale( 1.1 );
+		     -o-transform: scale( 1.1 );
+		        transform: scale( 1.1 );
+	}
+
+
+.avgrund-ready body,
+.avgrund-ready .avgrund-contents,
+.avgrund-ready .avgrund-popup,
+.avgrund-ready .avgrund-cover {
+	-webkit-transform-origin: 50% 50%;
+	   -moz-transform-origin: 50% 50%;
+	    -ms-transform-origin: 50% 50%;
+	     -o-transform-origin: 50% 50%;
+	        transform-origin: 50% 50%;
+
+	-webkit-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	   -moz-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	    -ms-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	     -o-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	        transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+.avgrund-ready .avgrund-popup.no-transition {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	    -ms-transition: none;
+	     -o-transition: none;
+	        transition: none;
+}
+
+
+		</style>
+		<style type="text/css">
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, 
+body {
+	height: 100%;
+	overflow: hidden;
+}
+
+html {
+	background-color: #222;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
+	background-repeat: repeat;
+}
+small {
+	display: block;
+	margin-top: 15px;
+	padding-top: 15px;
+	color: #333;
+	font-size: 0.85em;
+	border-top: 1px dashed #ccc;
+
+	-webkit-text-size-adjust: none;
+}
+.sharing {
+	margin-top: 50px;
+}
+
+body {
+	background: #fff;
+
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+		</style>		
+		<!--___________________________________________________________________________-->
+		<!--___________________________________________________________________________-->
+		<!--__________________________css for the popup________________________________-->
+		<!--______________________________ends here____________________________________-->
+		
+		<script>/*thinking popup*/
+			var i=3;
+			var timer;			
+			function openDialogThink() {
+				Avgrund.show( "#think-timer" );
+				timer=document.getElementById("timercount");				
+			}
+			function closeDialog() {
+				Avgrund.hide();
+			}
+			function counter()
+			{				
+				setTimeout(function(){						
+						timer.innerHTML=i--;
+						if(i>=0)
+						counter();
+						else
+						{							
+							i=3;
+							timer.innerHTML="better start THINKING!!";							
+							document.getElementById('thinkform').submit();
+						}
+				},1000);
+			}
+		</script>
+		<script>/*training fresh popup*/
+			var j=3;
+			var timer1;
+			function openDialogTrainFresh() {
+				Avgrund.show( "#train-fresh-timer" );
+				timer1=document.getElementById("timercount2");				
+			}			
+			function counter1()
+			{
+				setTimeout(function(){			
+						timer1.innerHTML=j--;
+						if(j>=0)
+						counter1();
+						else
+						{
+							j=3;
+							timer1.innerHTML="better start TRAINING!!";
+							document.getElementById('trainformFresh').submit();
+						}
+				},1000);
+			}
+		</script>		
+		<script>/*training update popup*/
+			var j=3;
+			var timer1;
+			function openDialogTrainUpdate() {
+				Avgrund.show( "#train-update-timer" );
+				timer1=document.getElementById("timercount3");				
+			}			
+			function counter1()
+			{
+				setTimeout(function(){			
+						timer1.innerHTML=j--;
+						if(j>=0)
+						counter1();
+						else
+						{
+							j=3;
+							timer1.innerHTML="better start TRAINING!!";
+							document.getElementById('trainformUpdate').submit();
+						}
+				},1000);
+			}
+		</script>		
+	</head>
+	<body>
+		<!--_____________________________________-->
+		<!--______________ think ___ popup ______-->
+		<!--_____________________________________-->
+		<aside id="think-timer" class="avgrund-popup"><!--think aside popup-->
+			<form onsubmit="counter(); return false;" id="thinkform" action="/test" method="GET">
+			<h1>TIMER</h1><br/>
+			<p id="timercount">-</p>
+			<input type='text' name='uname' value={{name}} style="display:none;"/>
+			<input type="submit" value="think" class="submitbutton"/>
+			</form>
+			<button class="btn btn-primary btn" onclick="javascript:closeDialog();">Close</button>
+		</aside>
+		<!--_____________________________________-->
+		<!--_______ train ___ fresh _____ popup _-->
+		<!--_____________________________________-->
+		<aside id="train-fresh-timer" class="avgrund-popup"><!--train fresh aside popup-->
+			<form onsubmit="counter1(); return false;" id="trainformFresh" action="/train" method="GET">
+			<h1>TIMER</h1><br/>
+			<p id="timercount2">-</p>
+		<!--<input type="submit" value="think" class="sumitbutton"/>-->
+			<input type="text" name="obname" value={{x.item}} style="display:none;"/>
+			<input type='text' name='uname' value={{name}} style="display:none;"/>
+			<input type="submit" value="train fresh" class="sumitbutton"/>
+			</form>
+			<!-- 
+				
+				<form action="/train" method="get">				
+				<input type="text" name="obname" value={{x.item}} style="display:none;"/>
+				<input type='text' name='uname' value={{name}} style="display:none;"/>
+				<input type="submit" value="train fresh"/>
+				</form>
+
+			 -->
+			<button class="btn btn-primary btn" onclick="javascript:closeDialog();">Close</button>
+		</aside>
+		<!--_____________________________________-->
+		<!--__ train ___ update  ____ popup _____-->
+		<!--_____________________________________-->
+		<aside id="train-update-timer" class="avgrund-popup"><!--train update aside popup-->
+			<form onsubmit="counter2(); return false;" id="trainformUpdate" action="/train" method="GET">
+			<h1>TIMER</h1><br/>
+			<p id="timercount3">-</p>
+			<input type="submit" value="think" class="sumitbutton"/>
+			</form>
+			<button class="btn btn-primary btn" onclick="javascript:closeDialog();">Close</button>
+		</aside>
+		<!--_____________________________________-->
+		<!--__ input __ objects ___ popup _______-->
+		<!--_____________________________________-->
+		<aside id="default-popup" class="avgrund-popup"><!--add object popup-->
+			<h2>Input object details here</h2>
+				<form action="/add" method="get">
+					<p id="errmsg" style="color:red;">*</p>
+					<input style="width:63%;height:22%;" class="textbox_big" type="text" name="obname" id="obid" placeholder=" name of the object "/><br/><br/>		
+					<input type='text' name='uname' value={{name}} style="display:none;"/>
+					<input type="submit" class="submitbutton" value="submit"/>
+				</form><br/>
+					<button class="btn btn-primary btn" onclick="javascript:closeDialog();">Close</button>
+		</aside>		
+		<!--_________________________________________-->
+		<!--_________________________________________-->
+		<!--_________________________________________-->
+		<article class="avgrund-contents">
+	<div class="thinkmenu" align="center"><br/>
+		<button onclick="openDialogThink()"  class="btn btn-primary btn"> think something </button><br/><br/>
+		<p>(wait for the timer to stop and then start thinking about one of the objects from the below list)</p>
+		<br/><br/>		
+		<button onclick="openDialog()" class=""> add element </button>
+		<br/><br/>		
+		<br/>
+	</div>
+		<br/>
+	<div class="elementstable" align="center" width="50%" style="table-layout: fixed; width: 50%; position:absolute; left:25%;">
+	<table id="objects" class="table table-hover table-striped" >
+	{% for x in items %}
+		<tr>
+			<td>{{x.item}}</td>
+			<td> 
+			
+			<form action="/train" method="get">				
+				<input type="text" name="obname" value={{x.item}} style="display:none;"/>
+				<input type='text' name='uname' value={{name}} style="display:none;"/>
+				<input type="submit" value="train fresh"/>
+			</form>
+			
+			<!--
+			<button onclick="openDialogTrainFresh()"  class="btn btn-primary btn"> think something </button><br/><br/>
+			-->
+			
+			</td>
+			<td>
+			<form action="/trainupdate" method="get">
+				<input type="text" name="obname" value={{x.item}} style="display:none;"/>
+				<input type='text' name='uname' value={{name}} style="display:none;"/>
+				<input type="submit" value="train update"/>
+			</form>
+			</td>
+			<td>
+				<form action="/delete" method="get">
+				<input type="text" name="obname" value={{x.item}} style="display:none;"/>
+				<input type='text' name='uname' value={{name}} style="display:none;"/>
+				<input type="submit" value="delete"/>
+			</form>
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+	</div>
+		</article>
+		<div class="avgrund-cover"></div>
+		<!--___________________________________________________________________________-->
+		<!--___________________________________________________________________________-->
+		<!--__________________________bottom script for the popup______________________-->
+		<!--___________________________________________________________________________-->
+		<script type="text/javascript">			
+var Avgrund = (function(){
+
+	var container = document.documentElement,
+		popup = document.querySelector( '.avgrund-popup-animate' ),
+		cover = document.querySelector( '.avgrund-cover' ),
+		currentState = null;
+
+	container.className = container.className.replace( /\s+$/gi, '' ) + ' avgrund-ready';
+
+	// Deactivate on ESC
+	function onDocumentKeyUp( event ) {
+		if( event.keyCode === 27 ) {
+			deactivate();
+		}
+	}
+
+	// Deactivate on click outside
+	function onDocumentClick( event ) {
+		if( event.target === cover ) {
+			deactivate();
+		}
+	}
+
+	function activate( state ) {
+		document.addEventListener( 'keyup', onDocumentKeyUp, false );
+		document.addEventListener( 'click', onDocumentClick, false );
+		document.addEventListener( 'touchstart', onDocumentClick, false );
+
+		removeClass( popup, currentState );
+		addClass( popup, 'no-transition' );
+		addClass( popup, state );
+
+		setTimeout( function() {
+			removeClass( popup, 'no-transition' );
+			addClass( container, 'avgrund-active' );
+		}, 0 );
+
+		currentState = state;
+	}
+
+	function deactivate() {
+		document.removeEventListener( 'keyup', onDocumentKeyUp, false );
+		document.removeEventListener( 'click', onDocumentClick, false );
+		document.removeEventListener( 'touchstart', onDocumentClick, false );
+
+		removeClass( container, 'avgrund-active' );
+		removeClass( popup, 'avgrund-popup-animate')
+	}
+
+	function disableBlur() {
+		addClass( document.documentElement, 'no-blur' );
+	}
+
+	function addClass( element, name ) {
+		element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+	}
+
+	function removeClass( element, name ) {
+		element.className = element.className.replace( name, '' );
+	}
+
+	function show(selector){
+		popup = document.querySelector( selector );
+		addClass(popup, 'avgrund-popup-animate');
+		activate();
+		return this;
+	}
+	function hide() {
+		deactivate();
+	}
+
+	return {
+		activate: activate,
+		deactivate: deactivate,
+		disableBlur: disableBlur,
+		show: show,
+		hide: hide
+	}
+
+})();
+		</script>
+		<!--___________________________________________________________________________-->
+		<!--___________________________________________________________________________-->
+		<!--__________________________bottom script for the popup______________________-->
+		<!--_____________________________________ends__________________________________-->
+	</body>
+</html>
